@@ -52,6 +52,3 @@ Une barre de progression conçue pour maximiser l'irritation :
 
 MIT - Faites ce que vous voulez, tant que c'est inutilisable.
 
----
-
-*Un projet né d'un post LinkedIn et d'une passion pour le design... inversé.*
