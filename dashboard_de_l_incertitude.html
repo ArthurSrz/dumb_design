@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Shifting Sands</title>
+    <style>
+        body {
+            background-color: #2c3e50;
+            font-family: 'Arial', sans-serif;
+            color: white;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        h1 {
+            margin-bottom: 10px;
+            font-size: 1.5rem;
+            color: #ecf0f1;
+        }
+
+        p.subtitle {
+            color: #bdc3c7;
+            margin-bottom: 30px;
+            font-style: italic;
+        }
+
+        /* The Chaos Container */
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            width: 800px;
+            max-width: 90vw;
+            perspective: 1000px; /* Adds 3D depth for the flip effect */
+        }
+
+        .card {
+            background-color: #ecf0f1;
+            color: #2c3e50;
+            padding: 20px;
+            border-radius: 8px;
+            height: 150px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+            transition: transform 0.3s ease, background-color 0.2s;
+            
+            /* This is the magic property we will manipulate */
+            order: 0; 
+        }
+
+        .card:hover {
+            background-color: #e74c3c; /* Turn red to signify danger/error */
+            color: white;
+            transform: scale(0.95); /* Shrink slightly */
+        }
+
+        .card h2 {
+            margin: 0 0 10px 0;
+            font-size: 1.2rem;
+        }
+
+        .card p {
+            font-size: 0.9rem;
+            margin: 0;
+        }
+
+        /* Specific colors for visual confusion */
+        .c1 { border-top: 5px solid #e67e22; }
+        .c2 { border-top: 5px solid #2ecc71; }
+        .c3 { border-top: 5px solid #3498db; }
+        .c4 { border-top: 5px solid #9b59b6; }
+        .c5 { border-top: 5px solid #f1c40f; }
+        .c6 { border-top: 5px solid #1abc9c; }
+
+    </style>
+</head>
+<body>
+
+    <h1>The Dashboard of Uncertainty</h1>
+    <p class="subtitle">Try to click the "Account Settings" card.</p>
+
+    <div class="grid-container" id="grid">
+        <div class="card c1" onmouseenter="shuffleDeck()">
+            <h2>Analytics</h2>
+            <p>View your data</p>
+        </div>
+        <div class="card c2" onmouseenter="shuffleDeck()">
+            <h2>Messages</h2>
+            <p>3 Unread</p>
+        </div>
+        <div class="card c3" onmouseenter="shuffleDeck()">
+            <h2>Profile</h2>
+            <p>Edit Photo</p>
+        </div>
+        <div class="card c4" onmouseenter="shuffleDeck()">
+            <h2>Billing</h2>
+            <p>Past due</p>
+        </div>
+        <div class="card c5" onmouseenter="shuffleDeck()">
+            <h2>Account Settings</h2>
+            <p><strong>(Click Me!)</strong></p>
+        </div>
+        <div class="card c6" onmouseenter="shuffleDeck()">
+            <h2>Support</h2>
+            <p>Get help</p>
+        </div>
+        <div class="card c1" onmouseenter="shuffleDeck()">
+            <h2>Downloads</h2>
+            <p>Files ready</p>
+        </div>
+        <div class="card c2" onmouseenter="shuffleDeck()">
+            <h2>Security</h2>
+            <p>Password reset</p>
+        </div>
+        <div class="card c3" onmouseenter="shuffleDeck()">
+            <h2>Log Out</h2>
+            <p>Goodbye</p>
+        </div>
+    </div>
+
+    <script>
+        function shuffleDeck() {
+            const container = document.getElementById('grid');
+            const cards = Array.from(container.children);
+            
+            // We use a short timeout so the user sees the card they aimed for
+            // for a split second before it vanishes. This maximizes psychological damage.
+            setTimeout(() => {
+                cards.forEach(card => {
+                    // Flexbox/Grid 'order' property allows us to visually reorder 
+                    // DOM elements without actually moving them in the HTML structure.
+                    // We assign a random integer between 0 and 100 to every card.
+                    const randomOrder = Math.floor(Math.random() * 100);
+                    card.style.order = randomOrder;
+                });
+            }, 100); // 100ms delay - just enough to register "I'm about to click"
+        }
+    </script>
+
+</body>
+</html>
